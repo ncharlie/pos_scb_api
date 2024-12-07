@@ -23,7 +23,7 @@ class POSOrder(models.Model):
     def _process_order(self, order, existing_order):
         order_id = super()._process_order(order=order, existing_order=existing_order)
         order_id = self.browse(order_id)
-        print("order.get('scb_transaction_details') >>>>>>> ", order.get('scb_transaction_details'))
+        # print("order.get('scb_transaction_details') >>>>>>> ", order.get('scb_transaction_details'))
         if order.get('scb_transaction_details'):
             scb_transaction_details = ast.literal_eval(order.get('scb_transaction_details'))
             order_id.write({

@@ -4,7 +4,7 @@
     <t t-name="pos_scb_api.CustomerDisplayQRPopup">
         <Dialog title.translate="QR Code Payment" size="'md'">
             <div class="d-flex flex-column align-items-center justify-content-center">
-                <p class="text-prewrap" style="font-weight: bold;">Please scan the QR code with QR Code Payment</p>
+                <p class="text-prewrap" style="font-weight: bold;">Please scan the QR code with Mobile App</p>
                 <div class="text-center fw-bolder" t-esc="state.qr_details.scb_name"/>
                 <t t-esc="state.qr_details.name"/>
                 <img alt="QR Code" style="width: 200px; height: 200px;" t-att-src="state.qr_details.qr_code"/>

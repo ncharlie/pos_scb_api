@@ -1,7 +1,17 @@
 import { QRPopup } from "@point_of_sale/app/utils/qr_code_popup/qr_code_popup";
 import { patch } from "@web/core/utils/patch";
 import { useState, onWillStart, onWillDestroy } from "@odoo/owl";
+import { _t } from "@web/core/l10n/translation";
 
+// this will patch static properties!!!
+patch(QRPopup, {
+  defaultProps: {
+    ...QRPopup.defaultProps,
+    title: _t("Mobile Banking"),
+  },
+});
+
+// this is probably the usual case: patching a class method
 patch(QRPopup.prototype, {
   setup() {
     super.setup(...arguments);

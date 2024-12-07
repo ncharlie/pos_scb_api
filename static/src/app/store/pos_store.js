@@ -64,7 +64,7 @@ patch(PosStore.prototype, {
           });
         }
         current_order.setQRdata(res);
-        qr = "data:image/png;base64," + res.qrImage;
+        qr = res.qrImage;
       }
       this.isClicked = false;
       this.chrome.sendOrderToCustomerDisplay(current_order, false);

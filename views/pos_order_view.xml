@@ -8,12 +8,11 @@
             <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//header/button[@name='refund']" position="after">
-                    <!--<button name="action_refund_payment" string="Refund Payment" type="object"
-                            invisible="not is_visible_void_button"/>-->
+                    <!--<button name="action_refund_payment" string="Refund Payment" type="object" invisible="not is_visible_void_button"/>-->
                     <field name="is_visible_void_button" invisible="1"/>
                 </xpath>
                 <page name="payments" position="after">
-                    <page string="QR30 Payment History">
+                    <page string="QR30 Payment History" invisible="not scb_payment_history_ids">
                         <field name="scb_transaction_details" label="SCB Transaction Details"/>
                         <field name="scb_payment_history_ids" colspan="4" nolabel="1" readonly="1" force_save="1">
                             <list>

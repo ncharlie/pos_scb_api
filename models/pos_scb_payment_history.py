@@ -23,7 +23,7 @@ class POSSCBPaymentHistory(models.Model):
             'fields': fields,
         }
 
-    name = fields.Many2one('scb.payment.configuration', string='QR30 Payment Configuration')
+    name = fields.Many2one('pos.payment.method', string='QR30 Payment Method')
     order_id = fields.Many2one('pos.order', string='POS Order')
     currency_id = fields.Many2one(related='order_id.currency_id')
     qr_code_raw_data = fields.Text('QR Code RAW Data')

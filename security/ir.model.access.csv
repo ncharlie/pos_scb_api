@@ -1,4 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-pos_scb_api.access_scb_payment_configuration_normal_user,access_scb_payment_configuration_normal_user,pos_scb_api.model_scb_payment_configuration,base.group_user,1,0,0,0
-pos_scb_api.access_scb_payment_configuration_admin_user,access_scb_payment_configuration_admin_user,pos_scb_api.model_scb_payment_configuration,pos_scb_api.group_scb_payment_configuration_admin,1,1,1,0
+pos_scb_api.access_pos_bank,access_pos_bank,pos_scb_api.model_pos_bank,base.group_user,1,0,0,0
 pos_scb_api.access_pos_scb_payment_history,access_pos_scb_payment_history,pos_scb_api.model_pos_scb_payment_history,base.group_user,1,1,1,1
