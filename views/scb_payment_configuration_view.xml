@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="scb_payment_configuration_list" model="ir.ui.view">
+            <field name="name">scb.payment.configuration.list</field>
+            <field name="model">scb.payment.configuration</field>
+            <field name="arch" type="xml">
+                <list decoration-muted="not active">
+                    <field name="sequence" widget="handle"/>
+                    <field name="create_date"/>
+                    <field name="name"/>
+                    <field name="fix_payment_fees"/>
+                    <field name="min_price"/>
+                    <field name="max_price"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="scb_payment_configuration_form" model="ir.ui.view">
+            <field name="name">scb.payment.configuration.form</field>
+            <field name="model">scb.payment.configuration</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button string="Test Connection" class="btn-primary" type="object" name="action_test_connection"/>
+                    </header>
+                    <sheet>
+                        <widget name="web_ribbon" title="Active" bg_color="text-bg-success" invisible="not active"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                        <field name="active" invisible="1"/>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. Configuration" class="oe_inline" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="pos_payment_method_id" required="1" options="{'no_open': True, 'no_create': True, 'no_create_edit': True}" domain="[('payment_method_type', '=', 'qr_code')]"/>
+                                <field name="journal_id" readonly="1" force_save="1" invisible="1" required="1"/>
+                                <field name="qr_timer"/>
+                                <field name="reference_3_prefix" required="1"/>
+                            </group>
+                            <group>
+                                <field name="fix_payment_fees" help="Fix Payment Fee on Order"/>
+                                <field name="fix_payment_product_id" required="fix_payment_fees &gt; 0" invisible="fix_payment_fees &lt;= 0" context="{'default_available_in_pos': True, 'default_type': 'service', 'taxes_id': False}" domain="[('type', '=', 'service'),('available_in_pos', '=', True)]"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="API Details">
+                                <group>
+                                    <group string="Api Information">
+                                        <field name="api_environment" required="1"/>
+                                        <field name="api_base_url" required="1" widget="CopyClipboardURL"/>
+                                        <field name="api_key" password="True" required="1"/>
+                                        <field name="api_secret" password="True" required="1"/>
+                                        <field name="ppid" password="True" required="1"/>
+                                        <field name="payment_status_webhook_url" widget="CopyClipboardURL" readonly="1" force_save="1"/>
+                                    </group>
+                                    <group string="Token Information">
+                                        <field name="access_token" password="True" readonly="1"/>
+                                        <field name="last_token_generated_at" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Price Configuration">
+                                <group>
+                                    <field name="min_price" help="Minimum price to allow QR payment – Zero means no limit"/>
+                                    <field name="max_price" help="Maximum price to allow QR payment – Zero means no limit"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_scb_payment_configuration" model="ir.actions.act_window">
+            <field name="name">QR30 Payment Methods</field>
+            <field name="res_model">scb.payment.configuration</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="menu_scb_payment_configuration" parent="point_of_sale.menu_point_config_product" action="action_scb_payment_configuration" groups="pos_scb_api.group_scb_payment_configuration_admin"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_pos_pos_form_inherited_scb_payment" model="ir.ui.view">
+            <field name="name">pos.order.scb.payment.form</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='refund']" position="after">
+                    <!--<button name="action_refund_payment" string="Refund Payment" type="object"
+                            invisible="not is_visible_void_button"/>-->
+                    <field name="is_visible_void_button" invisible="1"/>
+                </xpath>
+                <page name="payments" position="after">
+                    <page string="QR30 Payment History">
+                        <field name="scb_transaction_details" label="SCB Transaction Details"/>
+                        <field name="scb_payment_history_ids" colspan="4" nolabel="1" readonly="1" force_save="1">
+                            <list>
+                                <field name="order_id" column_invisible="1"/>
+                                <field name="currency_id" column_invisible="1"/>
+                                <field name="name" optional="hide"/>
+                                <field name="qr_code_raw_data" optional="hide"/>
+                                <field name="qr_status"/>
+                                <field name="amount"/>
+                                <field name="bank_transaction_ref"/>
+                                <field name="customer_bank_ref"/>
+                                <field name="customer_acc_no"/>
+                                <field name="customer_acc_name"/>
+                                <field name="ref1" optional="hide"/>
+                                <field name="ref2" optional="hide"/>
+                                <field name="ref3" optional="hide"/>
+                            </list>
+                        </field>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+    </data>
+</odoo>

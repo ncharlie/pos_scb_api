@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="group_scb_payment_configuration_admin" model="res.groups">
+            <field name="name">QR30 Payment Administrator</field>
+        </record>
+
+    </data>
+</odoo>

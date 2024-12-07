@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_scb_api.CustomerDisplayQRPopup">
+        <Dialog title.translate="QR Code Payment" size="'md'">
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <p class="text-prewrap" style="font-weight: bold;">Please scan the QR code with QR Code Payment</p>
+                <div class="text-center fw-bolder" t-esc="state.qr_details.scb_name"/>
+                <t t-esc="state.qr_details.name"/>
+                <img alt="QR Code" style="width: 200px; height: 200px;" t-att-src="state.qr_details.qr_code"/>
+                <div class="mt-1" t-if="state.qr_details.qr_amount">
+                    <strong>Amount: </strong>
+                    <t t-esc="state.qr_details.qr_amount"/>
+                </div>
+                <div class="mt-1" t-if="state.duration != 0">
+                    <span class="text-warning fw-bolder">Timer: </span>
+                    <span t-esc="state.duration"/>
+                </div>
+            </div>
+        </Dialog>
+    </t>
+
+</templates>

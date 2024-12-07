@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_scb_api.QRConfirmationDialog" t-inherit="point_of_sale.QRConfirmationDialog" t-inherit-mode="extension">
+        <xpath expr="//img" position="before">
+            <div class="text-center fw-bolder" t-esc="state.scb_name" t-if="state.duration"/>
+        </xpath>
+        <xpath expr="//div[hasclass('mt-1')]" position="after">
+            <div class="mt-1" t-if="state.duration and state.duration != 0">
+                <span class="text-warning fw-bolder">Timer: </span>
+                <span t-esc="state.duration"/>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="pos_scb_payment_history_list" model="ir.ui.view">
+            <field name="name">pos.scb.payment.history.list</field>
+            <field name="model">pos.scb.payment.history</field>
+            <field name="arch" type="xml">
+                <list create="0" edit="0" delete="0" duplicate="0">
+                    <field name="currency_id" column_invisible="1"/>
+                    <field name="create_date"/>
+                    <field name="name" optional="hide"/>
+                    <field name="order_id"/>
+                    <field name="amount"/>
+                    <field name="qr_status" widget="badge"
+                           decoration-info="qr_status == 'active'"
+                           decoration-danger="qr_status == 'cancelled'"
+                           decoration-warning="qr_status == 'timeout'"
+                           decoration-success="qr_status == 'paid'"/>
+                    <field name="qr_code_raw_data" optional="hide"/>
+                    <field name="bank_transaction_ref" optional="hide"/>
+                    <field name="customer_bank_ref" optional="hide"/>
+                    <field name="customer_acc_no" optional="hide"/>
+                    <field name="customer_acc_name" optional="hide"/>
+                    <field name="ref1" optional="hide"/>
+                    <field name="ref2" optional="hide"/>
+                    <field name="ref3" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="pos_scb_payment_history_search" model="ir.ui.view">
+            <field name="name">pos.scb.payment.history.search</field>
+            <field name="model">pos.scb.payment.history</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="order_id"/>
+                    <field name="qr_status"/>
+                    <field name="bank_transaction_ref"/>
+                    <field name="customer_bank_ref"/>
+                    <field name="customer_acc_no"/>
+                    <field name="customer_acc_name"/>
+                    <separator/>
+                    <filter string="Active" name="active" domain="[('qr_status', '=', 'active')]"/>
+                    <filter string="Cancelled" name="cancelled" domain="[('qr_status', '=', 'cancelled')]"/>
+                    <filter string="Timeout" name="timeout" domain="[('qr_status', '=', 'timeout')]"/>
+                    <filter string="Paid" name="paid" domain="[('qr_status', '=', 'paid')]"/>
+                    <group expand="0" string="Group By">
+                        <filter name="qr_status_active" string="Active" domain="[('qr_status', '=', 'active')]"
+                                context="{'group_by':'qr_status'}"/>
+                        <filter name="qr_status_cancelled" string="Cancelled" domain="[('qr_status', '=', 'cancelled')]"
+                                context="{'group_by':'qr_status'}"/>
+                        <filter name="qr_status_timeout" string="Timeout" domain="[('qr_status', '=', 'timeout')]"
+                                context="{'group_by':'qr_status'}"/>
+                        <filter name="qr_status_paid" string="Paid" domain="[('qr_status', '=', 'paid')]"
+                                context="{'group_by':'qr_status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_pos_scb_payment_history" model="ir.actions.act_window">
+            <field name="name">SCB Payment History</field>
+            <field name="res_model">pos.scb.payment.history</field>
+            <field name="view_mode">list</field>
+        </record>
+
+        <menuitem id="menu_pos_scb_payment_history" parent="point_of_sale.menu_point_of_sale"
+                  action="action_pos_scb_payment_history"/>
+
+    </data>
+</odoo>
