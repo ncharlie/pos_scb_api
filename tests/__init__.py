@@ -1,1 +1,2 @@
-from . import test_qr
+from . import common
+from . import test_controller
