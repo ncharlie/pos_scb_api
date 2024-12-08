@@ -280,7 +280,7 @@ class PosPaymentMethod(models.Model):
 
     def action_test_connection(self):
         try:
-            result = self._get_auth_token()
+            result = self._call_auth_api()
             if result:
                 message = _('Connection Test Successful!')
             else:
